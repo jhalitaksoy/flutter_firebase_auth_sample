@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+class SigninPage extends StatefulWidget {
+  SigninPage({Key key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SigninPageState createState() => _SigninPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SigninPageState extends State<SigninPage> {
 
   String email = "", password = "";
 
-  void onLoginTap() {
+  void onSigninTap() {
     print(email);
     print(password);
   }
@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
     return Align(
       alignment: Alignment.centerLeft,
       child: Text(
-        "Login",
+        "Sign in",
         style: TextStyle(
           fontSize: 32,
           color: Colors.black.withOpacity(0.7),
@@ -104,9 +104,9 @@ class _LoginPageState extends State<LoginPage> {
     return RaisedButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       color: Colors.orange,
-      onPressed: onLoginTap,
+      onPressed: onSigninTap,
       child: Text(
-        "Login",
+        "Sign in",
         style: TextStyle(color: Colors.white),
       ),
     );
