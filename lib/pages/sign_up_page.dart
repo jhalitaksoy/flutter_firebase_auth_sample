@@ -15,21 +15,19 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends SignBase<SignupPage> {
   String email = "", password1 = "", password2 = "";
 
-  void onSignupTap() async{
-    if(password1 == password2){
+  void onSignupTap() async {
+    if (password1 == password2) {
       var userId = await MyAuth().signUp(email, password1);
       if (userId != null) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) {
-            return Home();
-          },
-        ),
-      );
-    }
-    }else{
-      
-    }
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) {
+              return Home();
+            },
+          ),
+        );
+      }
+    } else {}
   }
 
   void onSigninTap() {
@@ -77,11 +75,25 @@ class _SignupPageState extends SignBase<SignupPage> {
       children: <Widget>[
         buildTitle("Sign up"),
         SizedBox(height: 20),
-        buildTextFormField("Email", onChangeEmail),
+        buildTextFormField(
+          "Email",
+          onChangeEmail,
+          keyboardType: TextInputType.emailAddress,
+        ),
         SizedBox(height: 10),
-        buildTextFormField("Password", onChangePassword1),
+        buildTextFormField(
+          "Password",
+          onChangePassword1,
+          keyboardType: TextInputType.text,
+          obscureText: true,
+        ),
         SizedBox(height: 10),
-        buildTextFormField("Password Again", onChangePassword2),
+        buildTextFormField(
+          "Password Again",
+          onChangePassword2,
+          keyboardType: TextInputType.text,
+          obscureText: true,
+        ),
         SizedBox(height: 20),
         buildBottomRow([
           buildFlatButton("Sign in", onSigninTap),

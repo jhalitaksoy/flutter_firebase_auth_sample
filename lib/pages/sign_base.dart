@@ -32,10 +32,14 @@ abstract class SignBase<T extends StatefulWidget> extends State<T> {
 
   TextFormField buildTextFormField(
     String hintText,
-    Function(String text) onChange,
-  ) {
+    Function(String text) onChange, {
+    TextInputType keyboardType = TextInputType.text,
+    bool obscureText = false,
+  }) {
     return TextFormField(
       onChanged: onChange,
+      keyboardType: keyboardType,
+      obscureText: obscureText,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(15),
         hintText: hintText,
@@ -59,11 +63,11 @@ abstract class SignBase<T extends StatefulWidget> extends State<T> {
     );
   }
 
-  FlatButton buildFlatButton(String text, Function() onTab){
+  FlatButton buildFlatButton(String text, Function() onTab) {
     return FlatButton(onPressed: onTab, child: Text(text));
   }
 
-  Widget buildBottomRow(List<Widget> children){
+  Widget buildBottomRow(List<Widget> children) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: children,

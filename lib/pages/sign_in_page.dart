@@ -69,9 +69,18 @@ class _SigninPageState extends SignBase<SigninPage> {
       children: <Widget>[
         buildTitle("Sign in"),
         SizedBox(height: 20),
-        buildTextFormField("Email", onChangeEmail),
+        buildTextFormField(
+          "Email",
+          onChangeEmail,
+          keyboardType: TextInputType.emailAddress,
+        ),
         SizedBox(height: 10),
-        buildTextFormField("Password", onChangePassword),
+        buildTextFormField(
+          "Password",
+          onChangePassword,
+          keyboardType: TextInputType.text,
+          obscureText: true,
+        ),
         SizedBox(height: 20),
         buildBottomRow([
           buildFlatButton("Sign up", onSignupTap),
