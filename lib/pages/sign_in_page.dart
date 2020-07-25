@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_firebase_auth_sample/auth/myauth.dart';
+import 'package:flutter_firebase_auth_sample/pages/home.dart';
 import 'package:flutter_firebase_auth_sample/pages/sign_base.dart';
 import 'package:flutter_firebase_auth_sample/pages/sign_up_page.dart';
 
@@ -13,13 +15,23 @@ class SigninPage extends StatefulWidget {
 class _SigninPageState extends SignBase<SigninPage> {
   String email = "", password = "";
 
-  void onSigninTap() {
-    print(email);
-    print(password);
+  void onSigninTap() async {
+    await MyAuth().signIn(email, password);
+    var user = await MyAuth().getCurrentUser();
+
+    if (user != null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) {
+            return Home();
+          },
+        ),
+      );
+    }
   }
 
   void onSignupTap() {
-     Navigator.of(context).pushReplacement(
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) {
           return SignupPage();
