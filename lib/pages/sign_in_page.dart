@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_firebase_auth_sample/pages/sign_base.dart';
+import 'package:flutter_firebase_auth_sample/pages/sign_up_page.dart';
 
 class SigninPage extends StatefulWidget {
   SigninPage({Key key}) : super(key: key);
@@ -8,13 +10,22 @@ class SigninPage extends StatefulWidget {
   _SigninPageState createState() => _SigninPageState();
 }
 
-class _SigninPageState extends State<SigninPage> {
-
+class _SigninPageState extends SignBase<SigninPage> {
   String email = "", password = "";
 
   void onSigninTap() {
     print(email);
     print(password);
+  }
+
+  void onSignupTap() {
+     Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) {
+          return SignupPage();
+        },
+      ),
+    );
   }
 
   void onChangeEmail(String text) {
@@ -34,21 +45,7 @@ class _SigninPageState extends State<SigninPage> {
     return SafeArea(
       child: Scaffold(
         body: Center(
-          child: buildLoginCard(),
-        ),
-      ),
-    );
-  }
-
-  Card buildLoginCard() {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 10,
-      margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(30, 40, 30, 20),
-        child: Form(
-          child: buildFormContent(),
+          child: buildCard(buildFormContent()),
         ),
       ),
     );
@@ -58,57 +55,17 @@ class _SigninPageState extends State<SigninPage> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        buildLoginTitle(),
+        buildTitle("Sign in"),
         SizedBox(height: 20),
         buildTextFormField("Email", onChangeEmail),
         SizedBox(height: 10),
         buildTextFormField("Password", onChangePassword),
         SizedBox(height: 20),
-        buildLoginButton(),
+        buildBottomRow([
+          buildFlatButton("Sign up", onSignupTap),
+          buildButton("Sign in", Colors.orange, onSigninTap),
+        ]),
       ],
-    );
-  }
-
-  Align buildLoginTitle() {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Text(
-        "Sign in",
-        style: TextStyle(
-          fontSize: 32,
-          color: Colors.black.withOpacity(0.7),
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
-  }
-
-  TextFormField buildTextFormField(
-    String hintText,
-    Function(String text) onChange,
-  ) {
-    return TextFormField(
-      onChanged: onChange,
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(15),
-        hintText: hintText,
-        isDense: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-      ),
-    );
-  }
-
-  RaisedButton buildLoginButton() {
-    return RaisedButton(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      color: Colors.orange,
-      onPressed: onSigninTap,
-      child: Text(
-        "Sign in",
-        style: TextStyle(color: Colors.white),
-      ),
     );
   }
 }
